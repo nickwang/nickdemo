@@ -1,5 +1,4 @@
 
-
 var g_timeOut=null;
 if (window.DeviceMotionEvent) {
 
@@ -67,9 +66,10 @@ function Point(x,y){
 };
 var _canvas=document.getElementById('idwater');
 var ctx=_canvas.getContext("2d");
-var waterWidth=document.body.clientWidth;
-var waterHeight=document.body.clientHeight;
-
+//var waterWidth=document.body.clientWidth;
+//var waterHeight=document.body.clientHeight;
+var waterWidth=800;
+var waterHeight=400;
 _canvas.setAttribute('width',waterWidth);
 _canvas.setAttribute('height',waterHeight);
 
