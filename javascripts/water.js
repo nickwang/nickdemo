@@ -44,7 +44,7 @@ function deviceMotionHandler(eventData) {
   var rotation = "rotate(" + tiltLR + "deg) rotate3d(1,0,0, " + (tiltFB) + "deg)";
   document.getElementById("imgLogo").style.webkitTransform = rotation;
     */
-   // document.getElementById('id_info').innerHTML=str;  
+    document.getElementById('id_info').innerHTML=str;  
  
 
    drawWater({
