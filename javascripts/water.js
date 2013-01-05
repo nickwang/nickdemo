@@ -92,7 +92,7 @@ function drawWater(obj){
 	var moCalcTiltFB=obj.moCalcTiltFB;
 	var facingUp=obj.facingUp;
 	
-	if( Math.abs(Math.abs(moCalcTiltLR)-Math.abs(lastTiltLR))<2){
+	if( Math.abs(Math.abs(moCalcTiltLR)-Math.abs(lastTiltLR))<5){
 		return ;
 	};
 	//var moCalcTiltLR=50;
