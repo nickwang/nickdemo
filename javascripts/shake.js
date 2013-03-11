@@ -104,12 +104,12 @@
 }(window, document));
 
 window.onload = function() {
-
+document.getElementById('idTip').innerHTML='onloaded';
   window.addEventListener('shake', shakeEventDidOccur, false);
 
 	//define a custom method to fire when shake occurs.
 	function shakeEventDidOccur () {
-	 
+
 	 document.getElementById('id_info').innerHTML='is shaked at'+new Date(); 
 
 		
