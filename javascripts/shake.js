@@ -110,7 +110,7 @@ document.getElementById('idTip').innerHTML='onloaded';
 	//define a custom method to fire when shake occurs.
 	function shakeEventDidOccur () {
 
-	 document.getElementById('id_info').innerHTML='is shaked at'+new Date(); 
+	 document.getElementById('id_info').innerHTML='<h1>is shaked at'+new Date().toLocaleString()+'</h1>'; 
 
 		
 	}
