@@ -34,7 +34,7 @@ function deviceMotionHandler(eventData) {
   'moCalcTiltFB:',tiltFB,
   'facingUp:',facingUp
   ].join('<br>');
-  
+  /*
   // 打印加速度的计算结果
   document.getElementById("moAccel").innerHTML = rawAcceleration;
   document.getElementById("moCalcTiltLR").innerHTML = tiltLR;
@@ -43,7 +43,7 @@ function deviceMotionHandler(eventData) {
   // 将2D和3D的转换应用到图片上
   var rotation = "rotate(" + tiltLR + "deg) rotate3d(1,0,0, " + (tiltFB) + "deg)";
   document.getElementById("imgLogo").style.webkitTransform = rotation;
-    
+    */
     document.getElementById('id_info').innerHTML=str;  
  
 
