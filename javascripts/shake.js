@@ -109,11 +109,10 @@ window.onload = function() {
 
 	//define a custom method to fire when shake occurs.
 	function shakeEventDidOccur () {
+	 
+	 document.getElementById('id_info').innerHTML='is shaked at'+new Date(); 
 
-		//put your own code here etc.
-		if (confirm("Undo?")) {
-
-		}
+		
 	}
 };
 
