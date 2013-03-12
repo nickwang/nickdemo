@@ -100,22 +100,22 @@
 		this.maxDeltaY=deltaY>this.maxDeltaY ? deltaY : this.maxDeltaY;
 		
 		this.maxDeltaZ=deltaZ>this.maxDeltaZ ? deltaZ : this.maxDeltaZ;
-		
+		/*
 		var str=['maxDeltaX=',this.maxDeltaX,
 			'maxDeltaY=',this.maxDeltaY,
 			'maxDeltaZ=',this.maxDeltaZ].join('\n');
 			
 		document.getElementById('idRaw').innerHTML='<h1>'+str+'</h1>';
-		
+		*/
 		if (((deltaX > this.threshold) && (deltaY > this.threshold)) || ((deltaX > this.threshold) && (deltaZ > this.threshold)) || ((deltaY > this.threshold) && (deltaZ > this.threshold))) {
 
 			//calculate time in milliseconds since last shake registered
 			currentTime = new Date();
 			timeDifference = currentTime.getTime() - this.lastTime.getTime();
-
+			
 			if (timeDifference > 1000) {
 				window.dispatchEvent(this.event);
-				str=['x=',current.x,
+			var str=['x=',current.x,
 					'y=',current.y,
 					'z=',current.z,
 					'deltaX=',deltaX,
