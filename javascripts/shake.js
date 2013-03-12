@@ -75,7 +75,14 @@
 		deltaX = Math.abs(this.lastX - current.x);
 		deltaY = Math.abs(this.lastY - current.y);
 		deltaZ = Math.abs(this.lastZ - current.z);
-
+		var str=['x=',current.x,
+			'y=',current.y,
+			'z=',current.z,
+			'deltaX=',deltaX,
+			'deltaY=',deltaY,
+			'deltaZ=',deltaZ].join('\n');
+			
+		document.getElementById('idRaw').innerHTML=str;
 		if (((deltaX > this.threshold) && (deltaY > this.threshold)) || ((deltaX > this.threshold) && (deltaZ > this.threshold)) || ((deltaY > this.threshold) && (deltaZ > this.threshold))) {
 
 			//calculate time in milliseconds since last shake registered
