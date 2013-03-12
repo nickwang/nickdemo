@@ -29,6 +29,9 @@
 		//create custom event
 		this.event = document.createEvent('Event');
 		this.event.initEvent('shake', true, true);
+		this.maxX=0;
+		this.maxY=0;
+		this.maxZ=0;
 	}
 
 	//reset timer values
@@ -38,6 +41,9 @@
 		this.lastX = null;
 		this.lastY = null;
 		this.lastZ = null;
+		this.maxX=0;
+		this.maxY=0;
+		this.maxZ=0;
 	};
 
 	//start listening for devicemotion
@@ -81,8 +87,10 @@
 			'deltaX=',deltaX,
 			'deltaY=',deltaY,
 			'deltaZ=',deltaZ].join('\n');
-			
-		document.getElementById('idRaw').innerHTML=str;
+		this.maxX=current.x>this.maxX ? current.x :this.maxX;
+		this.maxY=current.y>this.maxY ? current.y : this.maxY;
+		this.maxZ=current.z>this.maxZ ? current.z : this.maxZ;
+		document.getElementById('idRaw').innerHTML='<h1>'+str+'</h1>';
 		if (((deltaX > this.threshold) && (deltaY > this.threshold)) || ((deltaX > this.threshold) && (deltaZ > this.threshold)) || ((deltaY > this.threshold) && (deltaZ > this.threshold))) {
 
 			//calculate time in milliseconds since last shake registered
@@ -91,6 +99,17 @@
 
 			if (timeDifference > 1000) {
 				window.dispatchEvent(this.event);
+				str=['x=',current.x,
+					'y=',current.y,
+					'z=',current.z,
+					'deltaX=',deltaX,
+					'deltaY=',deltaY,
+					'deltaZ=',deltaZ,
+					'maxX=',this.maxX,
+					'maxY=',this.maxY,
+					'maxZ=',this.maxZ].join('\n');
+				document.getElementById('idResult').innerHTML='<div><h1>shake info:</h1></div><h1>'+str+'</h1>';
+				
 				this.lastTime = new Date();
 			}
 		}
