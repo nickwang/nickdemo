@@ -109,7 +109,9 @@
 					'maxY=',this.maxY,
 					'maxZ=',this.maxZ].join('\n');
 				document.getElementById('idResult').innerHTML='<div><h1>shake info:</h1></div><h1>'+str+'</h1>';
-				
+				this.maxX=0;
+				this.maxY=0;
+				this.maxZ=0;
 				this.lastTime = new Date();
 			}
 		}
