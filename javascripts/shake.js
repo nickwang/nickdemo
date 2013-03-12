@@ -32,6 +32,9 @@
 		this.maxX=0;
 		this.maxY=0;
 		this.maxZ=0;
+		this.maxDeltaX=0;
+		this.maxDeltaY=0;
+		this.maxDeltaZ=0;
 	}
 
 	//reset timer values
@@ -81,16 +84,29 @@
 		deltaX = Math.abs(this.lastX - current.x);
 		deltaY = Math.abs(this.lastY - current.y);
 		deltaZ = Math.abs(this.lastZ - current.z);
+		/*
 		var str=['x=',current.x,
 			'y=',current.y,
 			'z=',current.z,
 			'deltaX=',deltaX,
 			'deltaY=',deltaY,
 			'deltaZ=',deltaZ].join('\n');
+               	
 		this.maxX=current.x>this.maxX ? current.x :this.maxX;
 		this.maxY=current.y>this.maxY ? current.y : this.maxY;
 		this.maxZ=current.z>this.maxZ ? current.z : this.maxZ;
+		document.getElementById('idRaw').innerHTML='<h1>'+str+'</h1>';*/
+		this.maxDeltaX=deltaX>this.maxDeltaX ? deltaX : this.maxDeltaX;
+		this.maxDeltaY=deltaY>this.maxDeltaY ? deltaY : this.maxDeltaY;
+		
+		this.maxDeltaZ=deltaZ>this.maxDeltaZ ? deltaZ : this.maxDeltaZ;
+		
+		var str=['maxDeltaX=',this.maxDeltaX,
+			'maxDeltaY=',this.maxDeltaY,
+			'maxDeltaZ=',this.maxDeltaZ].join('\n');
+			
 		document.getElementById('idRaw').innerHTML='<h1>'+str+'</h1>';
+		
 		if (((deltaX > this.threshold) && (deltaY > this.threshold)) || ((deltaX > this.threshold) && (deltaZ > this.threshold)) || ((deltaY > this.threshold) && (deltaZ > this.threshold))) {
 
 			//calculate time in milliseconds since last shake registered
@@ -105,13 +121,17 @@
 					'deltaX=',deltaX,
 					'deltaY=',deltaY,
 					'deltaZ=',deltaZ,
-					'maxX=',this.maxX,
-					'maxY=',this.maxY,
-					'maxZ=',this.maxZ].join('\n');
+					'maxDeltaX=',this.maxDeltaX,
+					'maxDeltaY=',this.maxDeltaY,
+					'maxDeltaZ=',this.maxDeltaZ].join('\n');
 				document.getElementById('idResult').innerHTML='<div><h1>shake info:</h1></div><h1>'+str+'</h1>';
 				this.maxX=0;
 				this.maxY=0;
 				this.maxZ=0;
+				this.maxDeltaX=0;
+				this.maxDeltaY=0;
+				this.maxDeltaZ=0;
+				
 				this.lastTime = new Date();
 			}
 		}
