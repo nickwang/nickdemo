@@ -107,12 +107,21 @@
 			
 		document.getElementById('idRaw').innerHTML='<h1>'+str+'</h1>';
 		*/
+		currentTime = new Date();
+		timeDifference = currentTime.getTime() - this.lastTime.getTime();
+		if(timeDifference>1000){
+			var rawInfo=['x=',current.x,
+			'y=',current.y,
+			'z=',current.z,
+			'deltaX=',deltaX,
+			'deltaY=',deltaY,
+			'deltaZ=',deltaZ].join('\n');
+			
+			document.getElementById('idRaw').innerHTML='<h1>'+rawInfo+'</h1>';
+			this.lastTime = new Date();
+		}
 		if (((deltaX > this.threshold) && (deltaY > this.threshold)) || ((deltaX > this.threshold) && (deltaZ > this.threshold)) || ((deltaY > this.threshold) && (deltaZ > this.threshold))) {
 
-			//calculate time in milliseconds since last shake registered
-			currentTime = new Date();
-			timeDifference = currentTime.getTime() - this.lastTime.getTime();
-			
 			if (timeDifference > 1000) {
 				window.dispatchEvent(this.event);
 			var str=['x=',current.x,
