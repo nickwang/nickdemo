@@ -27,12 +27,21 @@ function deviceMotionHandler(eventData) {
   // 运用重力加速度9.81来计算得到一个百分比然后乘以转换角度90
   var tiltLR = Math.round(((acceleration.x) / 9.81) * -90);
   var tiltFB = Math.round(((acceleration.y + 9.81) / 9.81) * 90 * facingUp);
+  var x=acceleration.x;
+  var y=acceleration.y;
+  var z=acceleration.z;
+  var pitch=Math.atan(x/Math.sqrt(y*y+z*z));
+  var roll=Math.atan(y/Math.sqrt(x*x+z*z));
+  pitch=(pitch*180)/Math.PI;
+  roll=(roll*180)/Math.PI;
   
   var str='';
   str=['moAccel:',rawAcceleration,
   'moCalcTiltLR:',tiltLR,
   'moCalcTiltFB:',tiltFB,
-  'facingUp:',facingUp
+  'facingUp:',facingUp,
+  'pitch=',pitch,
+  'roll=',roll
   ].join('<br>');
   /*
   // 打印加速度的计算结果
