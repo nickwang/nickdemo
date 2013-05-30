@@ -1,0 +1,491 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="http://ctc.qzs.qq.com/ac/qzone/qzfl/qzfl_2.1.1.2.js"></script>
+
+<style type="text/css">
+.container
+{
+  border:1px solid #F36;
+	width:800px;
+	height:300px;
+	position:relative;
+	top:80px;
+	left:10px;
+}
+.cla
+{
+	width:50px;
+	height:50px;
+	background-color:#0066FF;
+	position:absolute;
+}
+.clb
+{
+	width:50px;
+	height:50px;
+	background-color:#000;
+	position:absolute;
+
+}
+.cl
+{
+	width:950px;
+	height:500px;
+	border:solid #F00 3px;
+}
+</style>
+
+<title>test qzfl</title>
+
+</head>
+
+<body>
+<div class="cl" >
+
+
+<canvas id="myCanvas" width="440" height="480">
+
+
+</canvas>
+
+</div>
+
+<script type="text/javascript">
+
+/*
+var c=document.getElementById("myCanvas");
+var cxt=c.getContext("2d");
+var grd=cxt.createLinearGradient(0,0,175,50);
+grd.addColorStop(0,"#FF0000");
+grd.addColorStop(1,"#00FF00");
+cxt.fillStyle=grd;
+cxt.fillRect(0,0,175,50);
+*/
+
+/*  载入照片
+var c=document.getElementById("myCanvas");
+var cxt=c.getContext("2d");
+var img=new Image();
+img.onload=function()
+{
+	cxt.drawImage(img,0,0);
+}
+
+img.src="canvasImg.png";
+*/
+
+function draw() {
+
+  var ctx = document.getElementById('myCanvas').getContext('2d');
+  ctx.fillRect(0,0,300,300);
+  ctx.translate(75,75);
+
+  // Create a circular clipping path        
+  ctx.beginPath();
+  ctx.arc(0,0,60,0,Math.PI*2,true);
+  ctx.clip();
+
+  // draw background
+  var lingrad = ctx.createLinearGradient(0,-75,0,75);
+  lingrad.addColorStop(0, '#212251');
+  lingrad.addColorStop(1, '#143778');
+  
+  ctx.fillStyle = lingrad;
+  ctx.fillRect(-75,-75,150,150);
+
+  // draw stars
+  for (j=1;j<50;j++){
+    ctx.save();
+    ctx.fillStyle = '#1f1';
+    ctx.translate(75-Math.floor(Math.random()*150),75-Math.floor(Math.random()*150));
+    drawStar(ctx,Math.floor(Math.random()*4)+2);
+    ctx.restore();
+  }
+  
+}
+
+function drawStar(ctx,r){
+  ctx.save();
+  ctx.beginPath()
+  ctx.moveTo(r,0);
+  for (i=0;i<9;i++){
+    ctx.rotate(Math.PI/5);
+    if(i%2 == 0) {
+      ctx.lineTo((r/0.525731)*0.200811,0);
+    } else {
+      ctx.lineTo(r,0);
+    }
+  }
+  ctx.closePath();
+  ctx.fill();
+  ctx.restore();
+}
+//draw();
+
+function drawTrails() {
+var canvas = document.getElementById('myCanvas');
+var context = canvas.getContext('2d');
+context.save();
+context.translate(130, 250);
+// Create the shape for our canopy path
+createCanopyPath(context);
+// Stroke the current path
+context.stroke();
+context.restore();
+}
+
+//drawTrails();
+
+function drawCanvas() {
+    // Get our Canvas element
+    var surface = document.getElementById("myCanvas");
+
+    if (surface.getContext) {
+        // If Canvas is supported
+        var context = surface.getContext('2d');
+
+        // Draw a red circle
+        context.beginPath();
+        context.arc(60, 60, 20, 0, Math.PI * 2, false);
+        context.closePath();
+        context.fillStyle = "#ff0000";
+        context.fill();
+	
+        // Set the clipping area
+        context.beginPath();
+        context.rect(0, 60, 300, 120);
+        context.clip();
+
+        // Draw the circle again
+        context.beginPath();
+        context.arc(150, 60, 40, 0, Math.PI * 2, false);
+        context.closePath();
+        context.fillStyle = "#ff0000";
+        context.fill();
+    }
+}
+var point=function(_x,_y){
+	this.x=_x;
+	this.y=_y;
+}
+//drawCanvas();
+function drawTest(A,B,C){
+    var ctx = document.getElementById('myCanvas').getContext('2d');
+	ctx.save();
+	ctx.beginPath();
+	ctx.moveTo(A.x,A.y);
+	ctx.lineTo(B.x,B.y);
+	ctx.stroke();
+	ctx.moveTo(B.x,B.y);
+	ctx.lineTo(C.x,C.y);
+	ctx.stroke();
+	ctx.lineTo(A.x,A.y);
+	ctx.stroke();
+	ctx.clip();
+	ctx.fillStyle = "#ff0000";
+    ctx.fill();
+	ctx.restore();
+}
+/*
+for(var i=0;i<10;i++){
+
+var a=new point((20+i*10),30);
+var b=new point((20+i*20),(80+i+8));
+var c=new point((40+i+20),60);
+
+drawTest(a,b,c);
+
+}*/
+
+function drawGradient(){
+var context = document.getElementById('myCanvas').getContext('2d');
+// Create a 3 stop gradient horizontally across the trunk
+var trunkGradient = context.createLinearGradient(5, 50, 5, 150);
+// The beginning of the trunk is medium brown
+trunkGradient.addColorStop(0, '#661100');
+// The middle-left of the trunk is lighter in color
+trunkGradient.addColorStop(0.4, '#996600');
+// The right edge of the trunk is darkest
+trunkGradient.addColorStop(1, '#552200');
+// Apply the gradient as the fill style, and draw the trunk
+context.fillStyle = trunkGradient;
+context.fillRect(5, 50, 10, 50);
+
+}
+
+//drawGradient();
+
+//
+function getAnimationPoint(a,m){
+
+	var d=new point();  //bc 为am的中垂线，d为bc与am的焦点
+	d.x=(a.x+m.x)/2;
+	d.y=(a.y+m.y)/2;
+	kbc=-(m.x-a.x)/(m.y-a.y);
+	
+	var b=new point();
+	var c=new point();
+	b.x=m.x;
+	b.y=(kbc*(b.x-d.x))+d.y;
+	c.y=m.y;
+	c.x=(c.y-d.y+kbc*d.x)/kbc;
+	return {
+		'b':b,
+		'c':c
+	}
+}
+
+
+
+function drawTriangle(A,B,C,color){
+
+  
+	//ctx.clearRect(0,0,_canvas.width,_canvas.height);
+	ctx.save();
+	
+	ctx.beginPath();
+	ctx.moveTo(A.x,A.y);
+	ctx.lineTo(B.x,B.y);
+	ctx.lineTo(C.x,C.y);
+	ctx.lineTo(A.x,A.y);
+	//ctx.clip();
+	
+	ctx.stroke();
+	ctx.fillStyle = color;
+    ctx.fill();
+	ctx.closePath();
+	ctx.restore();
+}
+
+function drawCurveTriangle(A,B,C,color){
+
+  
+	//ctx.clearRect(0,0,_canvas.width,_canvas.height);
+	ctx.save();
+	
+	ctx.beginPath();
+	ctx.moveTo(A.x,A.y);
+	ctx.lineTo(B.x,B.y);
+	ctx.lineTo(C.x,C.y);
+	ctx.lineTo(A.x,A.y);
+	//ctx.clip();
+	
+	//ctx.stroke();
+	ctx.fillStyle = color;
+    ctx.fill();
+	ctx.closePath();
+	ctx.restore();
+}
+/*
+   PointF CrossP = new PointF();
+        // 二元函数通式： y=ax+b
+        float a1 = (P2.y - P1.y) / (P2.x - P1.x);
+        float b1 = ((P1.x * P2.y) - (P2.x * P1.y)) / (P1.x - P2.x);
+
+        float a2 = (P4.y - P3.y) / (P4.x - P3.x);
+        float b2 = ((P3.x * P4.y) - (P4.x * P3.y)) / (P3.x - P4.x);
+        CrossP.x = (b2 - b1) / (a1 - a2);
+        CrossP.y = a1 * CrossP.x + b1;
+        return CrossP;
+*/
+//过两点的一条直线   y=ax+b
+function getLineEquation(p1,p2){
+	
+	var a=(p2.y-p1.y)/(p2.x-p1.x);
+	var b=((p1.x*p2.y)-(p2.x*p1.y))/(p1.x-p2.x);
+	return {
+		a:a,
+		b:b
+	}
+}
+//求解直线p1p2和直线p3p4的交点
+function getCrossPoint(p1,p2,p3,p4){
+
+//	QZFL.console.print("p1,"+p1.x+","+p1.y);
+//	QZFL.console.print("p2,"+p2.x+","+p2.y);
+//	QZFL.console.print("p3,"+p3.x+","+p3.y);
+//	QZFL.console.print("p4,"+p4.x+","+p4.y);
+	var crossp=new point();
+	var line_1={}; 
+	//y=ax+b
+	//var a1=(p2.y-p1.y)/(p2.x-p1.x);
+	//var b1=((p1.x*p2.y)-(p2.x*p1.y))/(p1.x-p2.x);
+	if(p3.x==p4.x){  //处理当p3p4组成的直线垂直于X轴的情况
+		 line_1=getLineEquation(p1,p2);
+		 crossp.x=p3.x;
+		 crossp.y=line_1.a*crossp.x+line_1.b;
+		 return crossp;
+	}
+	
+	 line_1=getLineEquation(p1,p2);
+	var line_2=getLineEquation(p3,p4);
+	
+	
+//	QZFL.console.print("line_1,"+line_1.a+","+line_1.b);
+//	QZFL.console.print("line_2,"+line_2.a+","+line_2.b);
+	
+	crossp.x=(line_2.b-line_1.b)/(line_1.a-line_2.a);
+	crossp.y=(line_1.a*crossp.x)+line_1.b;
+	return crossp;
+}
+     var _canvas=document.getElementById('myCanvas');
+	 var width=440;
+	 var height=480;
+  var ctx =_canvas .getContext('2d');
+	var touchP=new point(width,height); 		 //翻页触摸点
+	var rightCorner=new point(width,height);  // 右下角的拐点
+	var mBezierEnd_1=new point();
+	var mBezierStart_1=new point();
+
+	var mBezierVertex_1=new point();  //贝塞尔曲线1的顶点
+
+	var mBezierVertex_2=new point();
+	var mBezierStart_2=new point();
+	var mBezierEnd_2=new point();
+	var grayColor="RGB(192,192,192)";
+	var color="ffffff";
+	var yellowColor="yellow";
+	
+	var img=new Image();
+	var img2=new Image();
+	
+	ctx.drawImage(img,_canvas.width,_canvas.height);
+	//http://www.blump3.com/images/artist_chinese/movie_apples_on_my_eyes.jpg
+	img.onload = function(){
+	
+        //context.drawImage(imageObj, destX, destY);
+		QZFL.console.print("img loaded");
+			ctx.drawImage(img,0,0);
+    };
+	img.src="http://hiphotos.baidu.com/culerou/pic/item/27777f8926447dcd0e24442a.jpg";
+	img2.src="http://ww4.sinaimg.cn/bmiddle/59386d56jw1dowruheopij.jpg";
+var loop=function(){
+
+//  ctx.clearRect(0,0,_canvas.width,_canvas.height);
+  
+ // ctx.drawImage(img,_canvas.width,_canvas.height);
+  	ctx.drawImage(img,0,0,_canvas.width,_canvas.height);
+	
+  var pbc=getAnimationPoint(touchP,rightCorner);
+  
+  var mBezierControl_1=pbc.c;
+  var mBezierControl_2=pbc.b;
+  
+  mBezierEnd_1.x=(touchP.x+mBezierControl_1.x)/2;
+  mBezierEnd_1.y=(touchP.y+mBezierControl_1.y)/2;
+  mBezierStart_2.x=(touchP.x+mBezierControl_2.x)/2;
+  mBezierStart_2.y=(touchP.y+mBezierControl_2.y)/2;
+  kef=(mBezierEnd_1.y-mBezierStart_2.y)/(mBezierEnd_1.x-mBezierStart_2.x);
+  
+  mBezierEnd_2.x=rightCorner.x;
+  mBezierEnd_2.y=(kef*(mBezierEnd_2.x-mBezierStart_2.x))+mBezierStart_2.y;
+  
+  mBezierStart_1.y=rightCorner.y;
+  mBezierStart_1.x=((mBezierStart_1.y-mBezierEnd_1.y)/kef)+mBezierEnd_1.x;
+  
+		/*
+         * mBeziervertex1.x 推导   贝塞尔曲线的顶点
+         * ((mBezierStart1.x+mBezierEnd1.x)/2+mBezierControl1.x)/2 化简等价于
+         * (mBezierStart1.x+ 2*mBezierControl1.x+mBezierEnd1.x) / 4
+         */
+        mBezierVertex_1.x = (mBezierStart_1.x + 2 * mBezierControl_1.x + mBezierEnd_1.x) / 4;
+        mBezierVertex_1.y = (2 * mBezierControl_1.y + mBezierStart_1.y + mBezierEnd_1.y) / 4;
+		mBezierVertex_2.x = (mBezierStart_2.x + 2 * mBezierControl_2.x + mBezierEnd_2.x) / 4;
+        mBezierVertex_2.y = (2 * mBezierControl_2.y + mBezierStart_2.y + mBezierEnd_2.y) / 4;
+	/*
+	QZFL.console.print("mBezierVertex_1"+","+mBezierVertex_1.x+","+mBezierVertex_1.y);
+	QZFL.console.print("mBezierVertex_2"+","+mBezierVertex_2.x+","+mBezierVertex_2.y);
+	QZFL.console.print("mBezierControl_1,"+mBezierControl_1.x+","+mBezierControl_1.y);
+	*/
+	controlPoint_1=getCrossPoint(mBezierVertex_1,mBezierVertex_2,touchP,mBezierControl_1);
+	//QZFL.console.print("controlPoint_1.x,controlPoint_1.y"+controlPoint_1.x+","+controlPoint_1.y);
+	
+	
+	controlPoint_2=getCrossPoint(mBezierVertex_1,mBezierVertex_2,touchP,mBezierControl_2);
+	   
+	  /*
+	ctx.fillStyle =yellowColor;
+	
+    ctx.fillRect(0,0,_canvas.width,_canvas.height);
+	*/
+	
+    ctx.save();    //开始画下一页的背景
+	  
+	ctx.beginPath();
+	ctx.moveTo(mBezierStart_1.x,mBezierStart_1.y);
+	ctx.quadraticCurveTo(mBezierControl_1.x,mBezierControl_1.y,mBezierEnd_1.x,mBezierEnd_1.y);
+	ctx.lineTo(mBezierStart_2.x,mBezierStart_2.y);
+	
+	ctx.quadraticCurveTo(mBezierControl_2.x,mBezierControl_2.y,mBezierEnd_2.x,mBezierEnd_2.y);
+	ctx.lineTo(rightCorner.x,rightCorner.y);
+	
+	ctx.lineTo(mBezierStart_1.x,mBezierStart_1.y);
+	
+	//ctx.lineTo(mBezierEnd_2.x,mBezierEnd_2.y);
+	//ctx.fillStyle =grayColor;
+   // ctx.fill();
+    ctx.clip();
+	ctx.drawImage(img2,0,0,_canvas.width,_canvas.height);
+	ctx.closePath();
+	ctx.restore();
+	
+	
+    //drawTriangle(touchP,mBezierEnd_1,mBezierStart_2,color);
+	 //drawTriangle(touchP,controlPoint_1,controlPoint_2,color);
+	ctx.save();   //开始画翻页的区域
+	ctx.beginPath();
+	//ctx.moveTo(mBezierStart_1.x,mBezierStart_1.y);
+	//ctx.quadraticCurveTo(mBezierControl_1.x,mBezierControl_1.y,mBezierVertex_1.x,mBezierVertex_1.y);
+	ctx.moveTo(mBezierVertex_1.x,mBezierVertex_1.y);
+	/*QZFL.console.print("mBezierVertex_1.x,mBezierVertex_1.y"+mBezierVertex_1.x+","+mBezierVertex_1.y);
+	QZFL.console.print("controlPoint_1.x,controlPoint_1.y"+controlPoint_1.x+","+controlPoint_1.y);
+	QZFL.console.print("mBezierEnd_1.x,mBezierEnd_1.y"+mBezierEnd_1.x+","+mBezierEnd_1.y);*/
+	ctx.quadraticCurveTo(controlPoint_1.x,controlPoint_1.y,mBezierEnd_1.x,mBezierEnd_1.y);
+	
+	ctx.lineTo(touchP.x,touchP.y);
+	ctx.lineTo(mBezierStart_2.x,mBezierStart_2.y);
+	ctx.quadraticCurveTo(controlPoint_2.x,controlPoint_2.y,mBezierVertex_2.x,mBezierVertex_2.y);
+	//	ctx.quadraticCurveTo(mBezierControl_2.x,mBezierControl_2.y,mBezierEnd_2.x,mBezierEnd_2.y);
+	//ctx.lineTo(mBezierVertex_1.x,mBezierVertex_1.y);
+	ctx.lineTo(mBezierVertex_1.x,mBezierVertex_1.y);
+	ctx.fillStyle =color;
+    ctx.fill();
+	ctx.closePath();
+	
+	ctx.moveTo(mBezierVertex_2.x,mBezierVertex_2.y);
+	
+	ctx.restore();
+   
+	/*
+	
+	ctx.beginPath();
+	ctx.moveTo(mBezierStart_2.x,mBezierStart_2.y);
+	ctx.quadraticCurveTo(mBezierControl_2.x,mBezierControl_2.y,mBezierEnd_2.x,mBezierEnd_2.y);
+	ctx.lineTo(rightCorner.x,rightCorner.y);
+	ctx.fillStyle = grayColor;
+    ctx.fill();
+	
+	*/
+	
+	
+	touchP.x=touchP.x-15;
+	touchP.y=touchP.y-10;
+	if(touchP.x<=-100){
+		touchP.x=width;
+		touchP.y=height;
+	}
+	
+	setTimeout(loop,50);
+	
+}
+
+loop();
+
+
+</script>
+
+
+</body>
+</html>
